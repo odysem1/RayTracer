@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.20)
 project(RayTracer LANGUAGES CXX)
 
 add_executable(raytracer
-    src/ppm.cpp
+    src/main.cpp
 )
 
 target_compile_features(raytracer PRIVATE cxx_std_20)
