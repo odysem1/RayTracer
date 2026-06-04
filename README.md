@@ -20,7 +20,7 @@ Language: C++
 - [x] PPM image output
 - [x] Vec3 class
 - [x] Ray class
-- [ ] Background gradient rendering
+- [x] Background gradient rendering
 - [ ] Sphere-ray intersection
 - [ ] Surface normal visualization
 - [ ] Camera
