@@ -23,7 +23,7 @@ Language: C++
 - [x] Ray class
 - [x] Background gradient rendering
 - [x] Sphere-ray intersection
-- [ ] Surface normal visualization
+- [x] Surface normal visualization
 - [ ] Camera
 - [ ] Anti-aliasing
 - [ ] Diffuse material

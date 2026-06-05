@@ -45,5 +45,18 @@ color 헤더파일의 write_color 함수 및 ray class 추가
 
 `main.cpp - ray_color`: Sphere에 닿는 경우, Normal vector의 방향에 따라 픽셀을 색칠함
 
+## v[0.1.4] - Hittable objects, utility functions
 
+여러 ray hittable objects를 화면에 렌더링하기 위한 Hittable_list class, hittable class, sphere 구현 및 헤더파일 정리(rtweekend.h, interval.h 구현)
 
+### Added
+
+`hittable_list.h, hittable.h, sphere.h`: ray가 닿는 도형들에 대한 정보를 저장하는 class를 정의함
+
+`rtweekend.h, interval.h`: 범용 상수와 함수를 정의함
+
+### Changed
+
+`include`: rtweekend에 범용 헤더파일들을 미리 include해서 다른 파일의 include가 복잡해지지 않게 정리함. 또한, 다양한 함수에서 범위를 min, max로 직접 사용하는 대신 interval class를 사용하도록 하였음
+
+`main.cpp - main`: hittable_list를 이용해 구 2개를 렌더링하도록 변경하고, hit 정보를 sphere class를 사용하도록 구현함
