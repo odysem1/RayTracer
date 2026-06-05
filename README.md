@@ -14,6 +14,7 @@ Language: C++
 
 - Ray tracing 개념 학습 중
 - 프로젝트 구조 설계 중
+- Sphere 렌더링 구현 중
 
 ## Goals
 
@@ -21,7 +22,7 @@ Language: C++
 - [x] Vec3 class
 - [x] Ray class
 - [x] Background gradient rendering
-- [ ] Sphere-ray intersection
+- [x] Sphere-ray intersection
 - [ ] Surface normal visualization
 - [ ] Camera
 - [ ] Anti-aliasing
@@ -31,4 +32,4 @@ Language: C++
 
 ## Reference
 
-- Ray Tracing in One Weekend
+- Ray Tracing in One Weekend: https://raytracing.github.io

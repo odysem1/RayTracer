@@ -26,10 +26,24 @@ color 헤더파일의 write_color 함수 및 ray class 추가
 
 카메라를 기준으로 viewport 평면을 3D 공간에 배치 후, 각 픽셀 좌표에 대응되는 3D 위치를 계산하는 코드를 구현함
 
-## Changed
+### Added
+`main.cpp - ray_color`: 픽셀의 위치에 따라 RGB 값이 달라지는 gradient 이미지 색을 생성함
 
-`main.c - main`: camera와 viewport, pixel 좌표에 해당하는 변수 추가, 카메라에서 각 픽셀을 향하는 ray 구현
+### Changed
 
-## Added
-`main.c - ray_color`: 픽셀의 위치에 따라 RGB 값이 달라지는 gradient 이미지 색을 생성함
+`main.cpp - main`: camera와 viewport, pixel 좌표에 해당하는 변수 추가, 카메라에서 각 픽셀을 향하는 ray 구현
+
+## v[0.1.3] - Sphere test: color rendering based on normal vector
+
+화면에 구를 렌더링하는 코드 구현
+
+### Added
+
+`main.cpp - hit_sphere`: 화면 상의 픽셀이 Camera 원점에서 나간 Ray가 화면상의 Sphere와 닿는 점인지 확인하며 판별식의 값을 return함
+
+### Changed
+
+`main.cpp - ray_color`: Sphere에 닿는 경우, Normal vector의 방향에 따라 픽셀을 색칠함
+
+
 
