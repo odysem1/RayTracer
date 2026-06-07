@@ -6,22 +6,6 @@
 #include "sphere.h"
 
 
-
-double hit_sphere(const point3& center, double radius, const ray& r){
-    vec3 oc = center - r.origin();
-    auto a = r.direction().length_squared();
-    auto h = dot(r.direction(), oc);
-    auto c = oc.length_squared() - radius*radius;
-    auto discriminant = h*h - a*c;
-
-    if (discriminant < 0){
-        return -1.0;
-    }else{
-        return (h - std::sqrt(discriminant)) / a;
-    }
-}
-
-
 int main(){
     hittable_list world;
 
@@ -33,5 +17,7 @@ int main(){
 
     cam.aspect_ratio = 16.0 / 9.0;
     cam.image_width = 400;
+    cam.samples_per_pixel = 100;
+
     cam.render(world);    
 }
