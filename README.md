@@ -13,8 +13,7 @@ Language: C++
 ## Status
 
 - Ray tracing 개념 학습 중
-- 프로젝트 구조 설계 중
-- Sphere 렌더링 구현 중
+- Metal object 구현 중
 
 ## Goals
 
@@ -24,9 +23,9 @@ Language: C++
 - [x] Background gradient rendering
 - [x] Sphere-ray intersection
 - [x] Surface normal visualization
-- [ ] Camera
-- [ ] Anti-aliasing
-- [ ] Diffuse material
+- [X] Camera
+- [X] Anti-aliasing
+- [X] Diffuse material
 - [ ] Metal material
 - [ ] Dielectric material
 

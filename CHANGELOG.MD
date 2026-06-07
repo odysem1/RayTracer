@@ -84,3 +84,40 @@ color 헤더파일의 write_color 함수 및 ray class 추가
 ### Changed
 
 `main.cpp`: write_color 함수 삭제 및 main 단순화
+
+---
+
+## [0.1.6] - Antialising
+
+random double을 만드는 함수를 이용해 Antialising 기능을 구현함
+
+### Added
+
+`rtweekend.h - random_double`: 0과 1 사이 또는 min과 max 사이의 랜덤한 double을 리턴하는 함수
+
+`camera.get_ray, sample_square`: 픽셀 사각형 내부의 점 하나에 쏜 랜덤한 ray를 생성함
+
+### Changed
+
+`camera.render`: get_ray에서 리턴한 ray samples_per_pixel개(기본 10개, main.cpp에서 100개로 정의함)의 색 평균으로 픽셀을 색칠함
+
+---
+
+## [0.1.7] - Reflection and gamma correction
+
+Lambert distribution에 따라 빛의 reflection을 구현함
+
+### Added
+
+`vec3.h - random_unit_vector`: 랜덤한 unit vector를 생성하는 함수
+
+`color.h - linear_to_gamma`: 물체의 밝기 차이가 빛 흡수도에 따라 너무 크게 변하지 않도록 자연스럽게 보정해주는 함수
+
+### Changed
+
+`camera.ray_color`: hit 지점에서 새로운 scattered ray를 Lambertian distribution에 따른 랜덤 방향으로 쏘고, 그 결과를 재귀적으로 계산하도록 변경함
+
+`interval(0.001, infinity)` 를 사용해 새 ray가 방금 맞은 표면에 다시 hit하는 self-intersection 문제를 줄임
+
+
+
