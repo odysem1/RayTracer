@@ -26,7 +26,7 @@ Language: C++
 - [X] Camera
 - [X] Anti-aliasing
 - [X] Diffuse material
-- [ ] Metal material
+- [X] Metal material
 - [ ] Dielectric material
 
 ## Reference

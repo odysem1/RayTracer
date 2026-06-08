@@ -119,5 +119,20 @@ Lambert distribution에 따라 빛의 reflection을 구현함
 
 `interval(0.001, infinity)` 를 사용해 새 ray가 방금 맞은 표면에 다시 hit하는 self-intersection 문제를 줄임
 
+## [0.1.8] - Materials: metal
+
+Material class를 크게 정의하고 그 안에 lambertian 물체와 metal 재질 물체가 그 class를 상속하도록 해서 코드를 리팩터링함
+
+### Added
+
+`material.h`: 물체의 재질을 표현하는 class들의 헤더파일
+
+`vec3.h - reflect`: 반사된 ray의 방향 리턴하는 함수
+
+### Changed
+
+`sphere.h, hittable.h`: hittable object(sphere)와 hit_record가 material 변수를 포함하도록 변경
+
+`camera.h - ray_color`: ray_color에서 scatterd ray를 구하는 부분을 달라진 구조에 맞춰서 변경
 
 
