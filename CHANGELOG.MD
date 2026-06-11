@@ -135,4 +135,10 @@ Material class를 크게 정의하고 그 안에 lambertian 물체와 metal 재�
 
 `camera.h - ray_color`: ray_color에서 scatterd ray를 구하는 부분을 달라진 구조에 맞춰서 변경
 
+## [0.1.8] - Materials: dielectrics
 
+### Added
+
+`material.h - dielectric`: dielectric 물체를 class로 구현
+
+`vec3.h - refract`: 빛의 굴절을 계산하는 함수
