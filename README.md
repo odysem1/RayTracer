@@ -17,6 +17,7 @@ Language: C++
 
 ## Goals
 
+### RTIOW
 - [x] PPM image output
 - [x] Vec3 class
 - [x] Ray class
@@ -28,6 +29,13 @@ Language: C++
 - [X] Diffuse material
 - [X] Metal material
 - [X] Dielectric material
+- [X] Defocus blur
+- [X] Final scene Rendering
+
+---
+
+### The next week
+
 
 ## Reference
 

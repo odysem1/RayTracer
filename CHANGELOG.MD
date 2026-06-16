@@ -164,3 +164,23 @@ Material class를 크게 정의하고 그 안에 lambertian 물체와 metal 재�
 `camera.h`: 기존 world 좌표축 기준 viewport 배치를 camera basis vector(`u`, `v`, `w`) 기반으로 계산하도록 변경
 
 `main.cpp`: movable camera 설정값을 사용해 렌더링하도록 변경
+
+---
+
+## [0.1.11] - Defocus blur & final render
+
+Pinhole camera 대신 lens 기반 카메라 원리를 적용해 focus 밖의 물체에 blur 효과가 나타나도록 변경
+
+### Added
+
+`vec3.h - random_in_unit_disk`: 원 안의 랜덤한 점을 하나 고르는 함수
+
+`camera.h - focus_dist, defocus_angle`: 렌즈의 초점거리와 렌즈 반지름을 결정하는 각도를 추가함
+
+`camera.h - defocus_disk_sample`: 렌즈 위의 랜덤한 점을 return하는 함수
+
+### Changed
+
+`camera.h`: focal_length를 전부 focus_dist로 바꾸고 가상의 렌즈 원반 위의 랜덤한 점에서 빛을 쏘도록 알고리즘을 변경함
+
+`main.c`: 렌더링할 scene을 변경함 - 많은 구형 물체와 3개의 중심 구
