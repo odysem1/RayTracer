@@ -119,6 +119,8 @@ Lambert distribution에 따라 빛의 reflection을 구현함
 
 `interval(0.001, infinity)` 를 사용해 새 ray가 방금 맞은 표면에 다시 hit하는 self-intersection 문제를 줄임
 
+---
+
 ## [0.1.8] - Materials: metal
 
 Material class를 크게 정의하고 그 안에 lambertian 물체와 metal 재질 물체가 그 class를 상속하도록 해서 코드를 리팩터링함
@@ -135,10 +137,30 @@ Material class를 크게 정의하고 그 안에 lambertian 물체와 metal 재�
 
 `camera.h - ray_color`: ray_color에서 scatterd ray를 구하는 부분을 달라진 구조에 맞춰서 변경
 
-## [0.1.8] - Materials: dielectrics
+---
+
+## [0.1.9] - Materials: dielectrics
 
 ### Added
 
 `material.h - dielectric`: dielectric 물체를 class로 구현
 
 `vec3.h - refract`: 빛의 굴절을 계산하는 함수
+
+---
+
+## [0.1.10] - Movable camera
+
+기존 원점 고정 카메라를 일반화해, 카메라 위치와 바라보는 지점에 따라 scene을 렌더링할 수 있도록 구현함
+
+### Added
+
+`camera.h - lookfrom, lookat, vup`: 카메라 위치, 바라보는 지점, 화면 위쪽 방향 설정 변수 추가
+
+`camera.h - vfov`: 세로 시야각을 이용한 viewport 크기 계산 기능 추가
+
+### Changed
+
+`camera.h`: 기존 world 좌표축 기준 viewport 배치를 camera basis vector(`u`, `v`, `w`) 기반으로 계산하도록 변경
+
+`main.cpp`: movable camera 설정값을 사용해 렌더링하도록 변경
