@@ -17,7 +17,7 @@ Language: C++
 
 ## Goals
 
-### RTIOW
+### Phase 1: RTIOW
 - [x] PPM image output
 - [x] Vec3 class
 - [x] Ray class
@@ -32,9 +32,7 @@ Language: C++
 - [X] Defocus blur
 - [X] Final scene Rendering
 
----
-
-### The next week
+### Phase 2: The next week
 
 
 ## Reference
