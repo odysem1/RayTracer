@@ -13,7 +13,6 @@ Language: C++
 ## Status
 
 - Ray tracing 개념 학습 중
-- Metal object 구현 중
 
 ## Goals
 
@@ -36,6 +35,9 @@ Language: C++
 
 - [x] Defocus Blur
 - [x] Bounding Volume Hierachies
+
+## BVH efficiency measurement
+
 
 
 ## Reference
