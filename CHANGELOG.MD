@@ -184,3 +184,19 @@ Pinhole camera 대신 lens 기반 카메라 원리를 적용해 focus 밖의 물
 `camera.h`: focal_length를 전부 focus_dist로 바꾸고 가상의 렌즈 원반 위의 랜덤한 점에서 빛을 쏘도록 알고리즘을 변경함
 
 `main.c`: 렌더링할 scene을 변경함 - 많은 구형 물체와 3개의 중심 구
+
+---
+
+## [0.2.1] - Motion blur
+
+움직이는 구를 구현하기 위해 object에 time 및 속도 정보를 추가, ray에도 추가
+
+### Changed
+
+`ray.h`: ray class에 time 정보 추가
+
+`material.h, sphere.h`: 시간에 따라 움직이는 구의 경우, 중심이 이동되는 것을 고려함
+
+`camera.h - get_ray`: 렌더링할 장면의 시간을 고려하기 위해 return하는 ray에 time 정보 추가
+
+
