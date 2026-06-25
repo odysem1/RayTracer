@@ -54,21 +54,31 @@ hittable_list diffuse_benchmark_scene(int sphere_count) {
     hittable_list world;
 
     auto ground_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
-    world.add(make_shared<sphere>(point3(0, -1000, 0), 1000, ground_material));
+    world.add(make_shared<sphere>(
+        point3(0, -1000, 0),
+        1000,
+        ground_material
+    ));
 
     auto sphere_material = make_shared<lambertian>(color(0.7, 0.3, 0.3));
 
     int count = 0;
-    for (int a = -50; a < 50 && count < sphere_count; ++a) {
-        for (int b = -50; b < 50 && count < sphere_count; ++b) {
+
+    for (int a = -100; a < 100 && count < sphere_count; ++a) {
+        for (int b = -100; b < 100 && count < sphere_count; ++b) {
             auto center = point3(
                 a + 0.9 * random_double(),
                 0.2,
                 b + 0.9 * random_double()
             );
 
-            world.add(make_shared<sphere>(center, 0.2, sphere_material));
-            count++;
+            world.add(make_shared<sphere>(
+                center,
+                0.2,
+                sphere_material
+            ));
+
+            ++count;
         }
     }
 
