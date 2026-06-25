@@ -199,4 +199,20 @@ Pinhole camera 대신 lens 기반 카메라 원리를 적용해 focus 밖의 물
 
 `camera.h - get_ray`: 렌더링할 장면의 시간을 고려하기 위해 return하는 ray에 time 정보 추가
 
+## [0.2.2] - AABB and BVH, Scene test
+
+AABB를 통한 Bounded volume hierachies 구현을 위해 AABB.h, BVH.h 추가 및 BVH 성능 테스트를 위해 Scene 구현 분리
+
+### Added
+
+`AABB.h, BVH.h`: 축에 평행한 box와 bounded volume tree class를 구현함
+
+`scene.h`: BVH 성능 비교를 위해 world 구현 부분을 분리함
+
+`interval.h` : 패딩을 더한 expand 함수와 두 interval 중 교차하는 부분을 구하는 생성자 구현
+
+`sphere.h, hittable.h, hittable_list.h`: 각각의 object를 둘러싸는 aabb 정보 추가
+
+`rtweekend.h`: random_int 함수 추가
+
 

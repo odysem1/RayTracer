@@ -35,7 +35,7 @@ Language: C++
 ### Phase 2: The next week
 
 - [x] Defocus Blur
-- [ ] Bounding Volume Hierachies
+- [x] Bounding Volume Hierachies
 
 
 ## Reference
