@@ -1,3 +1,4 @@
+#include <chrono>
 #include <cstdlib>
 #include <iostream>
 
@@ -15,6 +16,7 @@ int main(int argc, char** argv) {
     // World
     auto world = diffuse_benchmark_scene(sphere_count);
 
+    // BVH acceleration
     world = hittable_list(make_shared<bvh_node>(world));
 
     // Camera
@@ -32,5 +34,21 @@ int main(int argc, char** argv) {
 
     cam.defocus_angle = 0.0;
     cam.focus_dist = 10.0;
+
+    auto start = std::chrono::high_resolution_clock::now();
+
     cam.render(world);
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+        end - start
+    );
+
+    std::cerr << "SPHERES: " << sphere_count << "\n";
+    std::cerr << "RENDER_TIME_SECONDS: "
+              << elapsed.count() / 1000.0
+              << "\n";
+
+    return 0;
 }
