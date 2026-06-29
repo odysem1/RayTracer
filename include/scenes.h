@@ -3,6 +3,7 @@
 #include "hittable_list.h"
 #include "sphere.h"
 #include "material.h"
+#include "rtweekend.h"
 
 hittable_list final_scene() {
     hittable_list world;
