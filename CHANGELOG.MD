@@ -221,3 +221,7 @@ AABB를 통한 Bounded volume hierachies 구현을 위해 AABB.h, BVH.h 추가 �
 
 `build/benchmark.py`: BVH가 얼마나 렌더링 성능을 향상시키는지 측정하기 위한 python 파일
 
+### Changed
+
+`AABB.h`: hit 함수에서 ray_t.max를 줄여야 하는 곳에 ray_t.min을 대입하고 있는 오타 수정
+
