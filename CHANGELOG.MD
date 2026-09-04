@@ -207,7 +207,7 @@ AABB를 통한 Bounded volume hierachies 구현을 위해 AABB.h, BVH.h 추가 �
 
 `AABB.h, BVH.h`: 축에 평행한 box와 bounded volume tree class를 구현함
 
-`scene.h`: BVH 성능 비교를 위해 world 구현 부분을 분리함
+`scenes.h`: BVH 성능 비교를 위해 world 구현 부분을 분리함
 
 `interval.h` : 패딩을 더한 expand 함수와 두 interval 중 교차하는 부분을 구하는 생성자 구현
 
@@ -224,4 +224,26 @@ AABB를 통한 Bounded volume hierachies 구현을 위해 AABB.h, BVH.h 추가 �
 ### Changed
 
 `AABB.h`: hit 함수에서 ray_t.max를 줄여야 하는 곳에 ray_t.min을 대입하고 있는 오타 수정
+
+## [0.2.3] - Texture mapping
+
+Texture interface를 추가하고, object 표면 좌표를 이용해 procedural texture와 image texture를 적용할 수 있도록 구현함
+
+### Added
+
+`texture.h`: texture의 공통 인터페이스와 `solid_color`, `checker_texture`, `image_texture` 클래스 추가
+
+`sphere.h`: sphere 표면의 hit point를 UV 좌표로 변환하는 기능 추가
+
+`rtw_stb_image.h, stb_image.h`: 이미지 파일을 불러와 texture로 사용할 수 있도록 image loading helper 추가
+
+`scenes.h`: checker texture scene과 earth image texture scene 추가
+
+### Changed
+
+`material.h`: lambertian material이 단일 color 값 대신 texture의 `value(u, v, p)` 결과를 albedo로 사용하도록 변경
+
+
+
+
 

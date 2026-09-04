@@ -35,6 +35,7 @@ Language: C++
 
 - [x] Defocus Blur
 - [x] Bounding Volume Hierachies
+- [x] Texture mapping
 
 ## BVH efficiency measurement
 
