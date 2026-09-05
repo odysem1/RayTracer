@@ -10,8 +10,9 @@ int main() {
     // 1. bouncing_spheres()
     // 2. checkered_spheres()
     // 3. earth()
+    // 4. perlin_spheres()
 
-    auto world = earth();
+    auto world = perlin_spheres();
 
     // BVH acceleration
     world = hittable_list(make_shared<bvh_node>(world));

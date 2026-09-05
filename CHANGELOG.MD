@@ -243,6 +243,23 @@ Texture interface를 추가하고, object 표면 좌표를 이용해 procedural 
 
 `material.h`: lambertian material이 단일 color 값 대신 texture의 `value(u, v, p)` 결과를 albedo로 사용하도록 변경
 
+## [0.2.4] - Perlin noise texture
+
+Perlin noise를 사용한 procedural texture를 추가하고, turbulence를 적용해 더 자연스러운 noise pattern을 만들 수 있도록 구현함
+
+### Added
+
+`perlin.h`: Perlin noise generation 기능 추가
+
+`texture.h`: `noise_texture` 클래스 추가
+
+`turbulence`: 여러 frequency의 noise를 합성해 더 복잡한 패턴을 만들 수 있는 기능 추가
+
+`scenes.h`: Perlin noise texture를 테스트하기 위한 scene 추가
+
+
+
+
 
 
 
