@@ -257,6 +257,31 @@ Perlin noise를 사용한 procedural texture를 추가하고, turbulence를 적�
 
 `scenes.h`: Perlin noise texture를 테스트하기 위한 scene 추가
 
+## [0.2.5] - Quadrilaterals
+
+평면 위의 사각형 object를 렌더링할 수 있도록 quad class를 추가하고, quad scene 테스트를 위한 camera 설정을 분리함
+
+### Added
+
+`quad.h`: ray와 평면의 교차점을 계산하고, alpha/beta 좌표를 이용해 사각형 내부 hit 여부를 판정하는 quad class 추가
+
+`quad.h - is_interior`: 계산된 alpha/beta 좌표가 사각형 내부에 있는지 확인하고, texture mapping에 사용할 u/v 좌표를 저장하는 함수 추가
+
+`AABB.h - pad_to_minimums`: 두께가 거의 없는 평면 object의 bounding box가 너무 얇아지지 않도록 최소 padding 처리 추가
+
+`scene_cameras.h`: scene별 camera 설정을 분리하기 위해 main camera와 quad camera 생성 함수 추가
+
+`scenes.h`: 여러 색상의 quad object를 배치한 quad test scene 추가
+
+### Changed
+
+`main.cpp`: scene 생성과 camera 설정을 각각 `scenes.h`, `scene_cameras.h`에서 가져오도록 변경
+
+`scenes.h`: quad scene을 사용할 수 있도록 `quad.h` include 추가
+
+
+
+
 
 
 

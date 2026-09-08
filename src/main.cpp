@@ -1,8 +1,10 @@
 #include <iostream>
 
-#include "camera.h"
+#include "rtweekend.h"
 #include "scenes.h"
+#include "scene_cameras.h"
 #include "BVH.h"
+
 
 int main() {
 
@@ -11,27 +13,18 @@ int main() {
     // 2. checkered_spheres()
     // 3. earth()
     // 4. perlin_spheres()
+    // 5. quads()
 
-    auto world = perlin_spheres();
+    auto world = quads();
 
     // BVH acceleration
     world = hittable_list(make_shared<bvh_node>(world));
 
-    // Camera
-    camera cam;
+    // Camera list:
+    // 1. main_camera
+    // 2. quad_camera
 
-    cam.aspect_ratio = 16.0 / 9.0;
-    cam.image_width = 400;
-    cam.samples_per_pixel = 100;
-    cam.max_depth = 50;
-
-    cam.vfov = 20;
-    cam.lookfrom = point3(13, 2, 3);
-    cam.lookat = point3(0, 0, 0);
-    cam.vup = vec3(0, 1, 0);
-
-    cam.defocus_angle = 0.0;
-    cam.focus_dist = 10.0;
+    camera cam = quad_camera();
 
     cam.render(world);
 

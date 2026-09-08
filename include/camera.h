@@ -2,7 +2,6 @@
 
 #include "hittable.h"
 #include "material.h"
-#include <iostream>
 
 class camera {
     public:

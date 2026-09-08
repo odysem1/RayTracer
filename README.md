@@ -36,6 +36,8 @@ Language: C++
 - [x] Defocus Blur
 - [x] Bounding Volume Hierachies
 - [x] Texture mapping
+- [x] Perlin noise
+- [x] Quadrilaterlas
 
 ## BVH efficiency measurement
 
