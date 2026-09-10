@@ -87,9 +87,9 @@ color 헤더파일의 write_color 함수 및 ray class 추가
 
 ---
 
-## [0.1.6] - Antialising
+## [0.1.6] - Antialiasing
 
-random double을 만드는 함수를 이용해 Antialising 기능을 구현함
+random double을 만드는 함수를 이용해 Antialiasing 기능을 구현함
 
 ### Added
 
@@ -201,7 +201,7 @@ Pinhole camera 대신 lens 기반 카메라 원리를 적용해 focus 밖의 물
 
 ## [0.2.2] - AABB and BVH, Scene test
 
-AABB를 통한 Bounded volume hierachies 구현을 위해 AABB.h, BVH.h 추가 및 BVH 성능 테스트를 위해 Scene 구현 분리
+AABB를 통한 Bounded volume hierarchies 구현을 위해 AABB.h, BVH.h 추가 및 BVH 성능 테스트를 위해 Scene 구현 분리
 
 ### Added
 
@@ -278,6 +278,25 @@ Perlin noise를 사용한 procedural texture를 추가하고, turbulence를 적�
 `main.cpp`: scene 생성과 camera 설정을 각각 `scenes.h`, `scene_cameras.h`에서 가져오도록 변경
 
 `scenes.h`: quad scene을 사용할 수 있도록 `quad.h` include 추가
+
+## [0.2.6] - Lights and Cornell Box
+
+빛을 방출하는 material을 추가하고, scene 내부 광원을 이용해 Cornell Box를 렌더링할 수 있도록 구현함
+
+### Added
+
+`material.h - diffuse_light`: 빛을 방출하는 material class 추가
+
+`material.h - emitted`: material이 직접 방출하는 색을 반환하는 함수 추가
+
+`camera.h - background`: ray가 아무 object에도 hit하지 않았을 때 반환할 background color 설정 추가
+
+`scenes.h`: Cornell Box scene 추가
+
+### Changed
+
+`camera.h - ray_color`: hit 지점에서 material이 직접 방출하는 색과 scatter된 ray가 가져오는 색을 함께 계산하도록 변경
+
 
 
 

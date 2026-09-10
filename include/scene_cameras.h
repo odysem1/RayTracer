@@ -8,6 +8,7 @@ camera main_camera(){
     cam.image_width = 400;
     cam.samples_per_pixel = 100;
     cam.max_depth = 50;
+    cam.background = color(0.70, 0.80, 1.00);
 
     cam.vfov = 20;
     cam.lookfrom = point3(13, 2, 3);
@@ -15,7 +16,6 @@ camera main_camera(){
     cam.vup = vec3(0, 1, 0);
 
     cam.defocus_angle = 0.0;
-    cam.focus_dist = 10.0;
 
     return cam;
 }
@@ -35,5 +35,41 @@ camera quad_camera(){
 
     cam.defocus_angle = 0;
 
+    return cam;
+}
+
+camera light_camera(){
+    camera cam;
+    cam.aspect_ratio = 16.0 / 9.0;
+    cam.image_width = 400;
+    cam.samples_per_pixel = 100;
+    cam.max_depth = 50;
+    cam.background = color(0, 0, 0);
+
+    cam.vfov = 20;
+    cam.lookfrom = point3(26, 3, 6);
+    cam.lookat = point3(0, 2, 0);
+    cam.vup = vec3(0, 1, 0);
+
+    cam.defocus_angle = 0.0;
+
+    return cam;
+}
+
+camera cornell_camera(){
+    camera cam;
+
+    cam.aspect_ratio      = 1.0;
+    cam.image_width       = 600;
+    cam.samples_per_pixel = 200;
+    cam.max_depth         = 50;
+    cam.background        = color(0,0,0);
+
+    cam.vfov     = 40;
+    cam.lookfrom = point3(278, 278, -800);
+    cam.lookat   = point3(278, 278, 0);
+    cam.vup      = vec3(0,1,0);
+
+    cam.defocus_angle = 0;
     return cam;
 }

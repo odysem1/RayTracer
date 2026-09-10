@@ -34,10 +34,11 @@ Language: C++
 ### Phase 2: The next week
 
 - [x] Defocus Blur
-- [x] Bounding Volume Hierachies
+- [x] Bounding Volume Hierarchies
 - [x] Texture mapping
 - [x] Perlin noise
-- [x] Quadrilaterlas
+- [x] Quadrilaterals
+- [X] Lights
 
 ## BVH efficiency measurement
 
