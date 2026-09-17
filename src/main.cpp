@@ -3,7 +3,6 @@
 #include "rtweekend.h"
 #include "scenes.h"
 #include "scene_cameras.h"
-#include "BVH.h"
 
 
 int main() {
@@ -16,19 +15,19 @@ int main() {
     // 5. quads()
     // 6. simple_light()
     // 7. cornell_box()
+    // 8. cornell_smoke()
+    // 9. final_scene_TNW()
 
-    auto world = cornell_box();
-
-    // BVH acceleration
-    world = hittable_list(make_shared<bvh_node>(world));
+    auto world = final_scene_TNW();
 
     // Camera list:
     // 1. main_camera()
     // 2. quad_camera()
     // 3. light_camera()
     // 4. cornell_camera()
+    // 5. final_camera_TNW(int image_width, int samples_per_pixel, int max_depth)
 
-    camera cam = cornell_camera();
+    camera cam = final_camera_TNW(800, 10000, 40);
 
     cam.render(world);
 

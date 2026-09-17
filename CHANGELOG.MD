@@ -297,6 +297,29 @@ Perlin noise를 사용한 procedural texture를 추가하고, turbulence를 적�
 
 `camera.h - ray_color`: hit 지점에서 material이 직접 방출하는 색과 scatter된 ray가 가져오는 색을 함께 계산하도록 변경
 
+## [0.2.7] - Instances, Volumes and Final Scene
+
+기존 hittable object에 transform을 적용할 수 있도록 instance wrapper를 추가하고, 일정한 밀도를 가지는 volume 내부에서 ray가 확률적으로 산란하도록 구현함. 지금까지 구현한 기능을 조합한 The Next Week final scene을 추가함
+
+### Added
+
+`translate`: 기존 hittable object를 offset vector만큼 평행이동시키는 wrapper class 추가
+
+`rotate_y`: 기존 hittable object를 y축 기준으로 회전시키는 wrapper class 추가
+
+`box`: 여러 quad를 조합해 직육면체 object를 생성하는 함수 추가
+
+`constant_medium`: boundary 내부를 일정한 밀도의 medium으로 처리하고, ray가 내부에서 확률적으로 scatter되도록 구현
+
+`material.h - isotropic`: volume 내부에서 ray가 모든 방향으로 동일한 확률로 scatter되도록 하는 material 추가
+
+`scenes.h - cornell_smoke`: constant medium을 적용한 Cornell Smoke scene 추가
+
+`scenes.h - final_scene_TNW`: BVH, motion blur, texture, Perlin noise, lights, instances, volumes를 조합한 The Next Week final scene 추가
+
+`scene_cameras.h - final_camera_TNW`: final scene 전용 camera 설정 추가
+
+
 
 
 
