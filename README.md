@@ -43,6 +43,11 @@ Language: C++
 - [x] Volumes
 - [x] Final scene
 
+### Phase 2: The rest of your life
+
+- [x] Stratified Samplig(Jittering)
+- [ ] One Dimensional Monte Carlo Integration
+
 ## BVH efficiency measurement
 
 ### Before BVH

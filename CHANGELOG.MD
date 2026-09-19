@@ -319,6 +319,19 @@ Perlin noise를 사용한 procedural texture를 추가하고, turbulence를 적�
 
 `scene_cameras.h - final_camera_TNW`: final scene 전용 camera 설정 추가
 
+## [0.3.1] - Stratified Sampling
+
+Pixel 내부에서 무작위로 ray를 sampling하던 방식을 stratified sampling으로 변경해 sample 분포를 더 균일하게 만듦
+
+### Changed
+
+`camera.h`: pixel을 `sqrt(spp) × sqrt(spp)` 영역으로 나누고 각 영역 내부에서 하나의 ray를 random sampling하도록 변경
+
+`camera.h - render`: 기존 single sample loop를 subpixel grid를 순회하는 nested loop 구조로 변경
+
+`camera.h - get_ray`: 현재 subpixel 위치를 기반으로 ray의 sample position을 계산하도록 수정
+
+
 
 
 
