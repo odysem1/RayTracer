@@ -43,12 +43,17 @@ Language: C++
 - [x] Volumes
 - [x] Final scene
 
-### Phase 2: The rest of your life
+### Phase 3: The rest of your life
 
 - [x] Stratified Samplig(Jittering)
-- [x] One Dimensional Monte Carlo Integration
-- [x] Light Scattering
-- [X] Random direction sampling
+- [x] Monte Carlo Integration & Probability Density Functions
+- [x] Cosine-weighted Sampling
+- [X] Orthonormal Basis
+- [ ] Direct Light Sampling
+- [ ] PDF Abstraction
+- [ ] Mixture PDF
+- [ ] PDF Management & Scatter Refactoring
+- [ ] Final Rendering
 
 ## BVH efficiency measurement
 

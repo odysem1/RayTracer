@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.3] - Orthonormal Basis
+
+Cosine-weighted sampling으로 생성한 local direction을 실제 surface normal 기준의 world direction으로 변환할 수 있도록 ONB를 추가함
+
+### Added
+
+`onb.h`: surface normal을 기준으로 orthonormal basis를 생성하는 class 추가
+
+### Changed
+
+`lambertian - scatter`: cosine-weighted random direction을 ONB를 이용해 surface normal 기준 방향으로 변환하도록 변경
+
 ## [0.3.2] - Importance Sampling
 
 Material의 scattering 특성을 PDF로 표현하고, 원하는 PDF를 따르는 random direction을 생성할 수 있도록 sampling 구조를 변경함
