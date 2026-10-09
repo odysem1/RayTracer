@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.2] - Importance Sampling
+
+Material의 scattering 특성을 PDF로 표현하고, 원하는 PDF를 따르는 random direction을 생성할 수 있도록 sampling 구조를 변경함
+
+### Added
+
+`material - scattering_pdf`: scattered ray 방향에 대한 material의 scattering PDF를 계산하는 함수 추가
+
+`lambertian - scattering_pdf`: Lambertian surface의 cosine-weighted PDF인 `cos(theta) / pi` 구현
+
+`random_cosine_direction`: cosine-weighted PDF를 따르는 random direction 생성 함수 추가
+
+### Changed
+
+`camera - ray_color`: sampling PDF와 scattering PDF를 이용해 scattered ray의 contribution을 보정하도록 변경
+
 ## [0.3.1] - Stratified Sampling
 
 Pixel 내부에서 무작위로 ray를 sampling하던 방식을 stratified sampling으로 변경해 sample 분포를 더 균일하게 만듦

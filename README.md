@@ -46,7 +46,9 @@ Language: C++
 ### Phase 2: The rest of your life
 
 - [x] Stratified Samplig(Jittering)
-- [ ] One Dimensional Monte Carlo Integration
+- [x] One Dimensional Monte Carlo Integration
+- [x] Light Scattering
+- [X] Random direction sampling
 
 ## BVH efficiency measurement
 
