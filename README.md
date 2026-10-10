@@ -45,15 +45,18 @@ Language: C++
 
 ### Phase 3: The rest of your life
 
-- [x] Stratified Samplig(Jittering)
+- [x] Stratified Sampling(Jittering)
 - [x] Monte Carlo Integration & Probability Density Functions
 - [x] Cosine-weighted Sampling
 - [X] Orthonormal Basis
-- [ ] Direct Light Sampling
+- [X] Direct Light Sampling
 - [ ] PDF Abstraction
 - [ ] Mixture PDF
 - [ ] PDF Management & Scatter Refactoring
 - [ ] Final Rendering
+
+
+- [ ] Multithreading
 
 ## BVH efficiency measurement
 

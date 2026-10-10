@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.4] - Direct Light Sampling
+
+광원 방향을 직접 sampling하도록 변경해 작은 광원으로 인한 높은 variance를 줄이고, area light의 sampling PDF를 solid angle 기준으로 계산하도록 구현함
+
+### Added
+
+`camera.h - ray_color`: Cornell Box의 area light 위에서 random point를 선택하고 해당 지점을 향하는 scattered ray를 생성하도록 direct light sampling 추가
+
+`camera.h - ray_color`: 광원 표면에서 선택한 random point의 sampling 확률을 거리와 각도를 고려한 direction PDF로 변환하도록 구현
+
+### Changed
+
+`camera.h - ray_color`: material의 `scattering_pdf`와 light sampling PDF를 이용해 scattered ray의 contribution을 보정하도록 변경
+
+`diffuse_light - emitted`: light의 front face에서만 emission하도록 변경해 unidirectional area light 구현
+
 ## [0.3.3] - Orthonormal Basis
 
 Cosine-weighted sampling으로 생성한 local direction을 실제 surface normal 기준의 world direction으로 변환할 수 있도록 ONB를 추가함

@@ -60,8 +60,6 @@ class camera {
             sqrt_spp = int(std::sqrt(samples_per_pixel));
             pixel_samples_scale = 1.0 / (sqrt_spp * sqrt_spp);
             recip_sqrt_spp = 1.0 / sqrt_spp;
-            
-            pixel_samples_scale = 1.0 / samples_per_pixel;
 
             center = lookfrom;
 
@@ -136,14 +134,31 @@ class camera {
             
             ray scattered;
             color attenuation;
-            color color_from_emission = rec.mat->emitted(rec.u, rec.v, rec.p);
+            color color_from_emission = rec.mat->emitted(r, rec, rec.u, rec.v, rec.p);
             double pdf_value;
 
             if (!rec.mat->scatter(r, rec, attenuation, scattered, pdf_value))
                 return color_from_emission;
 
+            //cornell Box 천장 광원
+            auto on_light = point3(random_double(213, 343), 554, random_double(227, 332));
+
+            auto to_light = on_light - rec.p;
+            auto distance_squared = to_light.length_squared();
+            to_light = unit_vector(to_light);
+
+            if (dot(to_light, rec.normal) < 0)
+                return color_from_emission;
+            
+            double light_area = (343-213) * (332-227);
+            auto light_cosine = std::fabs(to_light.y());
+            if (light_cosine < 0.000001)
+                return color_from_emission;
+            
+            pdf_value = distance_squared / (light_cosine * light_area);
+            scattered = ray(rec.p, to_light, r.time());
+
             double scattering_pdf = rec.mat->scattering_pdf(r, rec, scattered);
-            pdf_value = scattering_pdf;
 
             color color_from_scatter = (attenuation * scattering_pdf * ray_color(scattered, depth-1, world)) / pdf_value;
 
