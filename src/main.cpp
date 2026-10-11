@@ -14,12 +14,13 @@ int main() {
     // 4. perlin_spheres()
     // 5. quads()
     // 6. simple_light()
-    // 7. cornell_box() + cornell_lights()
+    // 7. cornell_box()
     // 8. cornell_smoke()
-    // 9. final_scene_TNW() + final_scene_TNW_lights()
+    // 9. final_scene_TNW()
 
-    auto world = final_scene_TNW();
-    auto lights = final_scene_TNW_lights();
+    auto scene = final_scene_TNW();
+    auto world = scene.world;
+    auto lights = scene.lights;
 
     // Camera list:
     // 1. main_camera()

@@ -50,9 +50,9 @@ Language: C++
 - [x] Cosine-weighted Sampling
 - [X] Orthonormal Basis
 - [X] Direct Light Sampling
-- [ ] PDF Abstraction
-- [ ] Mixture PDF
-- [ ] PDF Management & Scatter Refactoring
+- [X] PDF Abstraction
+- [X] Mixture PDF
+- [X] PDF Management & Scatter Refactoring
 - [ ] Final Rendering
 
 

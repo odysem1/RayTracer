@@ -8,6 +8,13 @@
 #include "constant_medium.h"
 #include "BVH.h"
 
+struct scene_data {
+    hittable_list world;
+    hittable_list lights;
+};
+
+//Outdated(Before lights)
+
 hittable_list bouncing_spheres() {
     hittable_list world;
 
@@ -141,33 +148,47 @@ hittable_list quads(){
     return world;
 }
 
-hittable_list simple_light(){
 
+scene_data simple_light(){
+
+    scene_data scene;
     hittable_list world;
+    hittable_list lights;
 
     auto pertext = make_shared<noise_texture>(4);
     world.add(make_shared<sphere>(point3(0,-1000,0), 1000, make_shared<lambertian>(pertext)));
     world.add(make_shared<sphere>(point3(0,2,0), 2, make_shared<lambertian>(pertext)));
 
     auto difflight = make_shared<diffuse_light>(color(4,4,4));
-    world.add(make_shared<quad>(point3(3,1,-2), vec3(2,0,0), vec3(0,2,0), difflight));
-    world.add(make_shared<sphere>(point3(0,7,0), 2, difflight));
+    auto light1 = make_shared<quad>(point3(3,1,-2), vec3(2,0,0), vec3(0,2,0), difflight);
+    auto light2 = make_shared<sphere>(point3(0,7,0), 2, difflight);
+    world.add(light1);
+    world.add(light2);
+    lights.add(light1);
+    lights.add(light2);
 
-    return world;
+    scene.world = world;
+    scene.lights = lights;
+
+    return scene;
 }
 
 
 hittable_list cornell_box() {
+    scene_data scene;
     hittable_list world;
+    hittable_list lights;
 
     auto red   = make_shared<lambertian>(color(.65, .05, .05));
     auto white = make_shared<lambertian>(color(.73, .73, .73));
     auto green = make_shared<lambertian>(color(.12, .45, .15));
     auto light = make_shared<diffuse_light>(color(15, 15, 15));
 
+    auto light1 = make_shared<quad>(point3(343, 554, 332), vec3(-130,0,0), vec3(0,0,-105), light);
+
     world.add(make_shared<quad>(point3(555,0,0), vec3(0,555,0), vec3(0,0,555), green));
     world.add(make_shared<quad>(point3(0,0,0), vec3(0,555,0), vec3(0,0,555), red));
-    world.add(make_shared<quad>(point3(343, 554, 332), vec3(-130,0,0), vec3(0,0,-105), light));
+    world.add(light1);
     world.add(make_shared<quad>(point3(0,0,0), vec3(555,0,0), vec3(0,0,555), white));
     world.add(make_shared<quad>(point3(555,555,555), vec3(-555,0,0), vec3(0,0,-555), white));
     world.add(make_shared<quad>(point3(0,0,555), vec3(555,0,0), vec3(0,555,0), white));
@@ -180,37 +201,33 @@ hittable_list cornell_box() {
 
     // Glass Sphere
     auto glass = make_shared<dielectric>(1.5);
-    world.add(make_shared<sphere>(point3(190,90,190), 90, glass));
+    auto light2 = make_shared<sphere>(point3(190,90,190), 90, glass);
+    world.add(light2);
 
-    auto empty_material = shared_ptr<material>();
+    lights.add(light1);
+    lights.add(light2);
     
+    scene.world = world;
+    scene.lights = lights;
 
     return world;
 }
 
-hittable_list cornell_lights() {
-    auto empty_material = shared_ptr<material>();
-    hittable_list lights;
+scene_data cornell_smoke() {
 
-    lights.add(make_shared<quad>(point3(343,554,332), vec3(-130,0,0), vec3(0,0,-105), empty_material));
-    lights.add(make_shared<sphere>(point3(190, 90, 190), 90, empty_material));
-
-    return lights;
-}
-
-
-hittable_list cornell_smoke() {
-
+    scene_data scene;
     hittable_list world;
+    hittable_list lights;
 
     auto red   = make_shared<lambertian>(color(.65, .05, .05));
     auto white = make_shared<lambertian>(color(.73, .73, .73));
     auto green = make_shared<lambertian>(color(.12, .45, .15));
     auto light = make_shared<diffuse_light>(color(7, 7, 7));
 
+    auto light1 = make_shared<quad>(point3(113,554,127), vec3(330,0,0), vec3(0,0,305), light);
     world.add(make_shared<quad>(point3(555,0,0), vec3(0,555,0), vec3(0,0,555), green));
     world.add(make_shared<quad>(point3(0,0,0), vec3(0,555,0), vec3(0,0,555), red));
-    world.add(make_shared<quad>(point3(113,554,127), vec3(330,0,0), vec3(0,0,305), light));
+    world.add(light1);
     world.add(make_shared<quad>(point3(0,555,0), vec3(555,0,0), vec3(0,0,555), white));
     world.add(make_shared<quad>(point3(0,0,0), vec3(555,0,0), vec3(0,0,555), white));
     world.add(make_shared<quad>(point3(0,0,555), vec3(555,0,0), vec3(0,555,0), white));
@@ -226,11 +243,21 @@ hittable_list cornell_smoke() {
     world.add(make_shared<constant_medium>(box1, 0.01, color(0,0,0)));
     world.add(make_shared<constant_medium>(box2, 0.01, color(1,1,1)));
 
-    return world;
+    lights.add(light1);;
+
+    scene.world = world;
+    scene.lights = lights;
+
+    return scene;
 
 }
 
-hittable_list final_scene_TNW() {
+scene_data final_scene_TNW() {
+
+    scene_data scene;
+    hittable_list world;
+    hittable_list lights;
+
     hittable_list boxes1;
     auto ground = make_shared<lambertian>(color(0.48, 0.83, 0.53));
 
@@ -249,22 +276,28 @@ hittable_list final_scene_TNW() {
         }
     }
 
-    hittable_list world;
-
     world.add(make_shared<bvh_node>(boxes1));
 
     auto light = make_shared<diffuse_light>(color(7, 7, 7));
-    world.add(make_shared<quad>(point3(123,554,147), vec3(300,0,0), vec3(0,0,265), light));
+    auto light1 = make_shared<quad>(point3(123,554,147), vec3(300,0,0), vec3(0,0,265), light);
+
+    world.add(light1);
+    lights.add(light1);
 
     auto center1 = point3(400, 400, 200);
     auto center2 = center1 + vec3(30,0,0);
     auto sphere_material = make_shared<lambertian>(color(0.7, 0.3, 0.1));
     world.add(make_shared<sphere>(center1, center2, 50, sphere_material));
 
-    world.add(make_shared<sphere>(point3(260, 150, 45), 50, make_shared<dielectric>(1.5)));
-    world.add(make_shared<sphere>(
-        point3(0, 150, 145), 50, make_shared<metal>(color(0.8, 0.8, 0.9), 1.0)
-    ));
+    auto glass1 = make_shared<sphere>(point3(260, 150, 45), 50, make_shared<dielectric>(1.5));
+    world.add(glass1);
+    lights.add(glass1);
+
+    auto metal1 = make_shared<sphere>(point3(0, 150, 145), 50, make_shared<metal>(color(0.8, 0.8, 0.9), 1.0));
+    world.add(metal1);
+    lights.add(metal1);
+
+    //boundary랑 땅바닥은 반사하지만 광원 리스트에선 빼도록 한다
 
     auto boundary = make_shared<sphere>(point3(360,150,145), 70, make_shared<dielectric>(1.5));
     world.add(boundary);
@@ -292,16 +325,8 @@ hittable_list final_scene_TNW() {
     );
     
     
-    return world;
-}
+    scene.world = world;
+    scene.lights = lights;
 
-hittable_list final_scene_TNW_lights(){
-    auto empty_material = shared_ptr<material>();
-    hittable_list lights;
-
-    lights.add(make_shared<quad>(point3(123,554,147), vec3(300,0,0), vec3(0,0,265), empty_material));
-    lights.add(make_shared<sphere>(point3(260,150,45), 50, empty_material));
-    lights.add(make_shared<sphere>(point3(0,150,145), 50, empty_material));
-
-    return lights;
+    return scene;
 }

@@ -2,6 +2,7 @@
 #include "scenes.h"
 #include "BVH.h"
 
+
 camera main_camera(){
     camera cam;
     cam.aspect_ratio = 16.0 / 9.0;

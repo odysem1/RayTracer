@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.3.6] - PDF Management and Scene Sampling
+
+PDF 관리 구조를 정리하고 sphere 및 여러 hittable object를 importance sampling 대상으로 사용할 수 있도록 구현함
+
+### Added
+
+`material.h - scatter_record`: material의 attenuation, PDF, specular ray 정보를 하나의 구조체로 관리하도록 구현함
+
+`sphere.h - pdf_value, random`: 특정 지점에서 sphere가 차지하는 solid angle을 이용해 sphere 방향을 sampling하도록 구현함
+
+`hittable_list.h - pdf_value, random`: 여러 hittable object를 하나의 sampling distribution으로 사용할 수 있도록 구현함
+
+`scenes.h - scene_data`: world와 importance sampling 대상인 lights를 함께 관리하는 구조체를 추가함
+
+### Changed
+
+`material.h - scatter`: Lambertian은 PDF를 반환하고 Metal, Dielectric은 PDF 계산을 생략하는 specular ray를 반환하도록 구조를 변경함
+
+`camera.h - ray_color`: scatter_record를 사용하고 material PDF와 hittable PDF를 mixture PDF로 결합해 scattered ray를 생성하도록 변경함
+
+`scenes.h - final_scene_TNW`: area light, dielectric sphere, metal sphere를 importance sampling 대상으로 lights에 추가함
+
+`color.h - write_color`: NaN color 값이 이미지 출력에 전파되지 않도록 처리함
+
 ## [0.3.5] - PDF Abstraction and Mixture PDF
 
 여러 sampling distribution을 동일한 interface로 사용할 수 있도록 PDF 구조를 추상화하고, surface와 light sampling을 혼합하도록 구현함
