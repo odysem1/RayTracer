@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.3.5] - PDF Abstraction and Mixture PDF
+
+여러 sampling distribution을 동일한 interface로 사용할 수 있도록 PDF 구조를 추상화하고, surface와 light sampling을 혼합하도록 구현함
+
+### Added
+
+`pdf.h`: PDF 값을 계산하는 `value()`와 해당 PDF를 따르는 direction을 생성하는 `generate()` interface 추가
+
+`cosine_pdf`: surface normal을 기준으로 cosine-weighted direction을 sampling하도록 구현
+
+`hittable_pdf`: 특정 hittable object를 향하는 direction을 sampling하도록 구현
+
+`mixture_pdf`: 서로 다른 두 PDF를 혼합해 sampling하도록 구현
+
+`hittable.h`: object를 향하는 sampling을 위한 `pdf_value()`와 `random()` interface 추가
+
+`quad.h`: area light sampling을 위한 `pdf_value()`와 `random()` 구현
+
+### Changed
+
+`camera.h - ray_color`: `cosine_pdf`와 `hittable_pdf`를 `mixture_pdf`로 결합해 surface와 light direction을 함께 sampling하도록 변경
+
+`scenes.h`: rendering scene과 함께 direct light sampling에 사용할 light object를 구성하도록 변경
+
 ## [0.3.4] - Direct Light Sampling
 
 광원 방향을 직접 sampling하도록 변경해 작은 광원으로 인한 높은 variance를 줄이고, area light의 sampling PDF를 solid angle 기준으로 계산하도록 구현함

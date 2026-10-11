@@ -7,18 +7,19 @@
 
 int main() {
 
-    // World list:
+    // World list + lights list:
     // 1. bouncing_spheres()
     // 2. checkered_spheres()
     // 3. earth()
     // 4. perlin_spheres()
     // 5. quads()
     // 6. simple_light()
-    // 7. cornell_box()
+    // 7. cornell_box() + cornell_lights()
     // 8. cornell_smoke()
     // 9. final_scene_TNW()
 
     auto world = cornell_box();
+    auto lights = cornell_lights();
 
     // Camera list:
     // 1. main_camera()
@@ -29,7 +30,7 @@ int main() {
 
     camera cam = cornell_camera();
 
-    cam.render(world);
+    cam.render(world, lights);
 
     return 0;
 }

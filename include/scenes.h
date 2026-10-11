@@ -156,6 +156,7 @@ hittable_list simple_light(){
     return world;
 }
 
+
 hittable_list cornell_box() {
     hittable_list world;
 
@@ -181,8 +182,19 @@ hittable_list cornell_box() {
     box2 = make_shared<translate>(box2, vec3(130,0,65));
     world.add(box2);
 
+    auto empty_material = shared_ptr<material>();
+    
+
     return world;
 }
+
+quad cornell_lights() {
+    auto empty_material = shared_ptr<material>();
+    quad lights(point3(343,554,332), vec3(-130,0,0), vec3(0,0,-105), empty_material);
+
+    return lights;
+}
+
 
 hittable_list cornell_smoke() {
 
