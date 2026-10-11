@@ -172,15 +172,15 @@ hittable_list cornell_box() {
     world.add(make_shared<quad>(point3(555,555,555), vec3(-555,0,0), vec3(0,0,-555), white));
     world.add(make_shared<quad>(point3(0,0,555), vec3(555,0,0), vec3(0,555,0), white));
 
+    // Box
     shared_ptr<hittable> box1 = box(point3(0,0,0), point3(165,330,165), white);
     box1 = make_shared<rotate_y>(box1, 15);
     box1 = make_shared<translate>(box1, vec3(265,0,295));
     world.add(box1);
 
-    shared_ptr<hittable> box2 = box(point3(0,0,0), point3(165,165,165), white);
-    box2 = make_shared<rotate_y>(box2, -18);
-    box2 = make_shared<translate>(box2, vec3(130,0,65));
-    world.add(box2);
+    // Glass Sphere
+    auto glass = make_shared<dielectric>(1.5);
+    world.add(make_shared<sphere>(point3(190,90,190), 90, glass));
 
     auto empty_material = shared_ptr<material>();
     
@@ -188,9 +188,12 @@ hittable_list cornell_box() {
     return world;
 }
 
-quad cornell_lights() {
+hittable_list cornell_lights() {
     auto empty_material = shared_ptr<material>();
-    quad lights(point3(343,554,332), vec3(-130,0,0), vec3(0,0,-105), empty_material);
+    hittable_list lights;
+
+    lights.add(make_shared<quad>(point3(343,554,332), vec3(-130,0,0), vec3(0,0,-105), empty_material));
+    lights.add(make_shared<sphere>(point3(190, 90, 190), 90, empty_material));
 
     return lights;
 }
@@ -290,4 +293,15 @@ hittable_list final_scene_TNW() {
     
     
     return world;
+}
+
+hittable_list final_scene_TNW_lights(){
+    auto empty_material = shared_ptr<material>();
+    hittable_list lights;
+
+    lights.add(make_shared<quad>(point3(123,554,147), vec3(300,0,0), vec3(0,0,265), empty_material));
+    lights.add(make_shared<sphere>(point3(260,150,45), 50, empty_material));
+    lights.add(make_shared<sphere>(point3(0,150,145), 50, empty_material));
+
+    return lights;
 }

@@ -16,10 +16,10 @@ int main() {
     // 6. simple_light()
     // 7. cornell_box() + cornell_lights()
     // 8. cornell_smoke()
-    // 9. final_scene_TNW()
+    // 9. final_scene_TNW() + final_scene_TNW_lights()
 
-    auto world = cornell_box();
-    auto lights = cornell_lights();
+    auto world = final_scene_TNW();
+    auto lights = final_scene_TNW_lights();
 
     // Camera list:
     // 1. main_camera()
@@ -28,7 +28,7 @@ int main() {
     // 4. cornell_camera()
     // 5. final_camera_TNW(int image_width, int samples_per_pixel, int max_depth)
 
-    camera cam = cornell_camera();
+    camera cam = final_camera_TNW(600, 100, 50);
 
     cam.render(world, lights);
 
