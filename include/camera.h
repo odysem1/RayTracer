@@ -9,6 +9,7 @@
 
 //For MT
 #include <thread>
+#include <atomic>
 
 
 class camera {
@@ -34,10 +35,17 @@ class camera {
 
             std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
-            auto render_worker = [this, &world, &lights, &framebuffer](){
+            std::atomic<int> next_row{0};
 
-                for (int j = 0; j < image_height; j++){
-                    std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
+            auto render_worker = [this, &world, &lights, &framebuffer, &next_row](){
+                while(true){
+                    const int j = next_row.fetch_add(1);
+                    if (j >= image_height)
+                        break;
+                    
+                    //std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
+
+                    seed_random(1234u + static_cast<std::mt19937::result_type>(j));
                     for (int i = 0; i < image_width; i++){
                         //Coordinates in framebuffer
                         const auto index = static_cast<std::size_t>(j) * image_width + i;
@@ -53,8 +61,16 @@ class camera {
                 }
             };
 
-            std::thread worker(render_worker);
-            worker.join();
+            std::vector<std::thread> workers;
+
+            for (int t = 0; t < 2; ++t){
+                workers.emplace_back(render_worker);
+            }
+            
+            for (auto& worker : workers){
+                worker.join();
+            }
+
 
             
 
