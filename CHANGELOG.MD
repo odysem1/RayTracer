@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.4.0] - Multithreading
+
+CPU rendering을 scanline 단위로 병렬화하고 thread 간 작업을 동적으로 분배하도록 구현함
+
+### Added
+
+`camera.h - framebuffer`: 각 thread가 계산한 pixel color를 저장하고 모든 렌더링이 끝난 뒤 순차적으로 출력하도록 구현함
+
+`camera.h - worker threads`: 여러 worker thread가 서로 다른 scanline을 병렬로 렌더링하도록 구현함
+
+`camera.h - atomic row scheduling`: `std::atomic` counter를 이용해 작업이 끝난 thread가 다음 row를 가져가는 dynamic scheduling을 구현함
+
+`camera.h - thread count`: 렌더링에 사용할 thread 개수를 직접 설정할 수 있도록 구현함
+
+### Changed
+
+`rtweekend.h - random generator`: 각 thread가 독립적인 random generator를 사용하도록 `thread_local` 기반으로 변경함
+
+`camera.h - render`: pixel color를 즉시 출력하던 방식에서 framebuffer에 저장한 뒤 모든 worker thread가 종료된 후 PPM을 순차 출력하도록 변경함
+
 ## [0.3.6] - PDF Management and Scene Sampling
 
 PDF 관리 구조를 정리하고 sphere 및 여러 hittable object를 importance sampling 대상으로 사용할 수 있도록 구현함

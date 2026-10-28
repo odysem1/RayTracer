@@ -29,7 +29,7 @@ int main() {
     // 4. cornell_camera()
     // 5. final_camera_TNW(int image_width, int samples_per_pixel, int max_depth, int thread_count = 1)
 
-    camera cam = final_camera_TNW(300, 50, 50, 1);
+    camera cam = final_camera_TNW(800, 1000, 50, 12);
 
     cam.render(world, lights);
 

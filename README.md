@@ -53,10 +53,10 @@ Language: C++
 - [X] PDF Abstraction
 - [X] Mixture PDF
 - [X] PDF Management & Scatter Refactoring
-- [ ] Final Rendering
+- [X] Final Rendering
 
 
-- [ ] Multithreading
+- [X] Multithreading
 
 ## BVH efficiency measurement
 
@@ -86,6 +86,39 @@ Language: C++
 | 200 | 201 | 26.579s | 6.235s | 4.263x |
 | 500 | 501 | 60.918s | 9.179s | 6.637x |
 | 1000 | 1001 | 117.773s | 11.367s | 10.361x |
+
+## Multithreading efficiency measurement
+
+Render settings:
+- Resolution: 300 × 300
+- Samples per pixel: 50
+- Max depth: 50
+- Scene: Final Scene (The Next Week)
+- Build: Release
+
+| Workers | Run 1 (s) | Run 2 (s) | Run 3 (s) | Avg (s) | Speedup |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 28.077300 | 27.956800 | 27.667800 | 27.900633 | 1.00x |
+| 2 | 15.201500 | 15.379200 | 14.837300 | 15.139333 | 1.84x |
+| 4 | 8.972880 | 8.769700 | 8.891170 | 8.877917 | 3.14x |
+| 8 | 5.879360 | 5.924850 | 6.081560 | 5.961923 | 4.68x |
+
+---
+
+Render settings:
+
+-   Resolution: 800 × 800
+-   Samples per pixel: 100
+-   Max depth: 40
+-   Scene: Final Scene (The Next Week)
+-   Build: Release
+
+| Workers | Run 1 (s) | Run 2 (s) | Run 3 (s) | Avg (s) | Speedup |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 365.078000 | 363.961000 | 362.224000 | 363.754333 | 1.00x |
+| 2 | 200.513000 | 203.993000 | 194.084000 | 199.530000 | 1.82x |
+| 4 | 115.058000 | 113.497000 | 114.314000 | 114.289667 | 3.18x |
+| 8 | 77.465800 | 78.209100 | 78.699100 | 78.124667 | 4.66x |
 
 ## Reference
 
