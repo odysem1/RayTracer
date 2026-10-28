@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.4.1] - Rendering Progress Output
+
+멀티스레딩 렌더링 중 완료된 scanline 수를 기준으로 남은 작업량을 확인할 수 있도록 진행도 출력을 추가함
+
+### Added
+
+`camera.h - completed_rows`: 렌더링이 완료된 scanline 수를 `std::atomic`으로 기록하도록 추가함
+
+### Changed
+
+`camera.h - render`: worker thread가 row 계산을 끝낼 때 완료 수를 증가시키고, Main Thread에서 `Scanlines remaining` 값을 주기적으로 출력하도록 변경함
+
 ## [0.4.0] - Multithreading
 
 CPU rendering을 scanline 단위로 병렬화하고 thread 간 작업을 동적으로 분배하도록 구현함

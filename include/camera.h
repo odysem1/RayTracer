@@ -45,8 +45,9 @@ class camera {
             std::vector<color> framebuffer(static_cast<std::size_t>(image_width) * image_height);            
 
             std::atomic<int> next_row{0};
+            std::atomic<int> completed_rows{0};
 
-            auto render_worker = [this, &world, &lights, &framebuffer, &next_row](){
+            auto render_worker = [this, &world, &lights, &framebuffer, &next_row, &completed_rows](){
                 while(true){
                     const int j = next_row.fetch_add(1);
                     if (j >= image_height)
@@ -68,6 +69,7 @@ class camera {
                         framebuffer[index] = pixel_samples_scale * pixel_color;
                     }
                 }
+                completed_rows.fetch_add(1);
             };
 
             std::vector<std::thread> workers;
@@ -76,6 +78,11 @@ class camera {
 
             for (int t = 0; t < thread_count; ++t){
                 workers.emplace_back(render_worker);
+            }
+            
+            while (completed_rows.load() < image_height) {
+                std::cerr << "\rScanlines remaining: " << image_height - completed_rows.load() << ' ' << std::flush;
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
             
             for (auto& worker : workers){
