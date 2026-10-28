@@ -75,7 +75,7 @@ camera cornell_camera(){
     return cam;
 }
 
-camera final_camera_TNW(int image_width, int samples_per_pixel, int max_depth){
+camera final_camera_TNW(int image_width, int samples_per_pixel, int max_depth, int thread_count = 1){
     camera cam;
 
     cam.aspect_ratio      = 1.0;
@@ -83,6 +83,7 @@ camera final_camera_TNW(int image_width, int samples_per_pixel, int max_depth){
     cam.samples_per_pixel = samples_per_pixel;
     cam.max_depth         = max_depth;
     cam.background        = color(0,0,0);
+    cam.thread_count = thread_count;
 
     cam.vfov     = 40;
     cam.lookfrom = point3(478, 278, -600);

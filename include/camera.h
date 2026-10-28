@@ -10,7 +10,7 @@
 //For MT
 #include <thread>
 #include <atomic>
-
+#include <stdexcept>
 
 class camera {
     public:
@@ -19,6 +19,8 @@ class camera {
         int samples_per_pixel = 10; // Count of random samples for each pixel
         int max_depth = 10;         // Max number of ray bounces
         color background;           // Scene backgroun color
+
+        int thread_count = 1;        // Thread count
 
         double vfov = 90;
         point3 lookfrom = point3(0, 0, 0);
@@ -29,11 +31,14 @@ class camera {
         double focus_dist = 3.4; // Distance from camera lookfrom point to plane of perfect focus
 
         void render(const hittable& world, const hittable& lights){
+
+            if (thread_count < 1){
+                throw std::invalid_argument("thread count must be at least 1");
+            }
+
             initialize();
 
             std::vector<color> framebuffer(static_cast<std::size_t>(image_width) * image_height);            
-
-            std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
             std::atomic<int> next_row{0};
 
@@ -63,7 +68,7 @@ class camera {
 
             std::vector<std::thread> workers;
 
-            for (int t = 0; t < 2; ++t){
+            for (int t = 0; t < thread_count; ++t){
                 workers.emplace_back(render_worker);
             }
             
@@ -74,7 +79,8 @@ class camera {
 
             
 
-
+            std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
+            
             for (int j = 0; j < image_height; j++){
                 for (int i = 0; i < image_width; i++){
                     const auto index = static_cast<std::size_t>(j) * image_width + i;
@@ -94,6 +100,8 @@ class camera {
         vec3 pixel_delta_u;             // Offset to pixel to the right
         vec3 pixel_delta_v;             //Offset to pixel below
         vec3 u, v, w;
+
+        
 
         vec3   defocus_disk_u;       // Defocus disk horizontal radius
         vec3   defocus_disk_v;       // Defocus disk vertical radiuscus

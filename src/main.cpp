@@ -27,9 +27,9 @@ int main() {
     // 2. quad_camera()
     // 3. light_camera()
     // 4. cornell_camera()
-    // 5. final_camera_TNW(int image_width, int samples_per_pixel, int max_depth)
+    // 5. final_camera_TNW(int image_width, int samples_per_pixel, int max_depth, int thread_count = 1)
 
-    camera cam = final_camera_TNW(300, 50, 50);
+    camera cam = final_camera_TNW(300, 50, 50, 4);
 
     cam.render(world, lights);
 
