@@ -14,6 +14,7 @@
 
 //For benchmark
 #include <chrono>
+#include <iomanip>
 
 
 class camera {
@@ -68,8 +69,8 @@ class camera {
                         }
                         framebuffer[index] = pixel_samples_scale * pixel_color;
                     }
+                    completed_rows.fetch_add(1);
                 }
-                completed_rows.fetch_add(1);
             };
 
             std::vector<std::thread> workers;
@@ -81,10 +82,13 @@ class camera {
             }
             
             while (completed_rows.load() < image_height) {
-                std::cerr << "\rScanlines remaining: " << image_height - completed_rows.load() << ' ' << std::flush;
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                int done = completed_rows.load();
+                double progress = 100.0 * done / image_height;
+
+                std::cerr << "\rRendering: " << std::fixed << std::setprecision(1) << progress << "% (" << done << "/" << image_height << " rows)   " << std::flush;
+                std::this_thread::sleep_for(std::chrono::seconds(1));
             }
-            
+
             for (auto& worker : workers){
                 worker.join();
             }

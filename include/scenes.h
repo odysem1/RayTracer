@@ -291,11 +291,11 @@ scene_data final_scene_TNW() {
 
     auto glass1 = make_shared<sphere>(point3(260, 150, 45), 50, make_shared<dielectric>(1.5));
     world.add(glass1);
-    lights.add(glass1);
+    //lights.add(glass1);
 
     auto metal1 = make_shared<sphere>(point3(0, 150, 145), 50, make_shared<metal>(color(0.8, 0.8, 0.9), 1.0));
     world.add(metal1);
-    lights.add(metal1);
+    //lights.add(metal1);
 
     //boundary랑 땅바닥은 반사하지만 광원 리스트에선 빼도록 한다
 
