@@ -44,6 +44,9 @@ class constant_medium : public hittable {
         rec.t = rec1.t + hit_distance / ray_length;
         rec.p = r.at(rec.t);
 
+        rec.u = 0.0;
+        rec.v = 0.0;
+
         rec.normal = vec3(1,0,0);
         rec.front_face = true;
         rec.mat = phase_function;

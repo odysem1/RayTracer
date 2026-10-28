@@ -12,6 +12,10 @@
 #include <atomic>
 #include <stdexcept>
 
+//For benchmark
+#include <chrono>
+
+
 class camera {
     public:
         double aspect_ratio = 1.0;  // Ratio of image width over height
@@ -68,6 +72,8 @@ class camera {
 
             std::vector<std::thread> workers;
 
+            const auto render_start = std::chrono::steady_clock::now();
+
             for (int t = 0; t < thread_count; ++t){
                 workers.emplace_back(render_worker);
             }
@@ -76,11 +82,12 @@ class camera {
                 worker.join();
             }
 
-
-            
+            const auto render_end = std::chrono::steady_clock::now();
+            const double render_seconds = std::chrono::duration<double>(render_end - render_start).count();
+            std::clog << "RENDER_TIME_SECONDS: "<< render_seconds << '\n';
 
             std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
-            
+
             for (int j = 0; j < image_height; j++){
                 for (int i = 0; i < image_width; i++){
                     const auto index = static_cast<std::size_t>(j) * image_width + i;
