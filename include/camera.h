@@ -4,6 +4,10 @@
 #include "pdf.h"
 #include "material.h"
 
+//For framebuffer
+
+#include <vector>
+
 class camera {
     public:
         double aspect_ratio = 1.0;  // Ratio of image width over height
@@ -23,21 +27,39 @@ class camera {
         void render(const hittable& world, const hittable& lights){
             initialize();
 
+            std::vector<color> framebuffer(static_cast<std::size_t>(image_width) * image_height);
+
+            
+
             std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
 
             for (int j = 0; j < image_height; j++){
                 std::clog << "\rScanlines remaining: " << (image_height - j) << ' ' << std::flush;
                 for (int i = 0; i < image_width; i++){
+                    //Coordinates in framebuffer
+                    const auto index = static_cast<std::size_t>(j) * image_width + i;
                     color pixel_color(0, 0, 0);
+
                     for (int s_j = 0; s_j < sqrt_spp; s_j++) {
                         for (int s_i = 0; s_i < sqrt_spp; s_i++) {
                             ray r = get_ray(i, j, s_i, s_j);
                             pixel_color += ray_color(r, max_depth, world, lights);
                         }
                     }
-                    write_color(std::cout, pixel_samples_scale * pixel_color);
+                    
+                    framebuffer[index] = pixel_samples_scale * pixel_color;
+                    
                 }
             }
+
+
+            for (int j = 0; j < image_height; j++){
+                for (int i = 0; i < image_width; i++){
+                    const auto index = static_cast<std::size_t>(j) * image_width + i;
+                    write_color(std::cout, framebuffer[index]);
+                }
+            }
+            
         }
     
     private:
